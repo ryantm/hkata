@@ -1,5 +1,17 @@
-$ curl https://nixos.org/nix/install | sh
+Install Nix:
 
-$ nix-shell -p entr -p "haskellPackages.ghcWithPackages (pkgs: [pkgs.mtl])"
+```
+curl https://nixos.org/nix/install | sh
+```
 
-$ echo Kata.hs | entr doctest Kata.hs
+Enter a shell with dependencies:
+
+```
+nix-shell -p entr -p "haskellPackages.ghcWithPackages (pkgs: [pkgs.mtl])"
+```
+
+Keep running tests every time file changed:
+
+```
+echo Kata.hs | entr doctest Kata.hs
+```
