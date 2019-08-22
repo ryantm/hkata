@@ -1,7 +1,13 @@
 module Kata where
 
--- | False if the string contains lowercase letters
--- >>> isUpperCase "c"
--- False
-isUpperCase :: String -> Bool
-isUpperCase s = undefined
+import Control.Category ((>>>))
+import Data.Char (toLower)
+import Data.Function ((&))
+import Data.List (sort)
+
+-- | True if the string is an isogram
+--
+-- >>> isIsogram ""
+-- True
+isIsogram :: String -> Bool
+isIsogram = undefined

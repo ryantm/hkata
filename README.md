@@ -13,5 +13,5 @@ nix-shell -p entr -p "haskellPackages.ghcWithPackages (pkgs: [pkgs.doctest])"
 Keep running tests every time file changed:
 
 ```
-echo Kata.hs | entr doctest Kata.hs
+echo Kata.hs | entr doctest --verbose Kata.hs
 ```
