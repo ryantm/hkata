@@ -1,8 +1,9 @@
 module Kata where
 
--- | Return the number of vowels given a string
+-- | Turn a string into mumbling
+-- http://www.codewars.com/kata/5667e8f4e3f572a8f2000039/train/haskell
 --
--- >>> getCount ""
--- 0
-getCount :: String -> Int
-getCount = undefined
+-- >>> accum "a"
+-- "A"
+accum :: String -> String
+accum = undefined
