@@ -1,0 +1,29 @@
+name: kata
+version: 0.0.0.0
+license: CC0-1.0
+author: Ryan Mulligan et al.
+maintainer: ryan@ryantm.com
+copyright: 2018-2019 Ryan Mulligan et al.
+extra-source-files:
+- README.md
+
+github: ryantm/hkata
+
+ghc-options:
+  -Wall
+
+dependencies:
+  - base >= 4.7 && < 5
+  - parsec
+  - foldl
+
+executables:
+  hkata:
+    main: Kata.hs
+
+tests:
+  doctests:
+    main: doctests.hs
+    ghc-options: -threaded
+    dependencies:
+      - doctest

@@ -1,9 +1,7 @@
 module Kata where
 
--- | Turn a string into mumbling
--- http://www.codewars.com/kata/5667e8f4e3f572a8f2000039/train/haskell
---
--- >>> accum "a"
--- "A"
-accum :: String -> String
-accum = undefined
+-- | returns the max and min number of a list
+-- >>> highAndLow "1"
+-- "1 1"
+highAndLow :: String -> String
+highAndLow = undefined
