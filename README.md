@@ -15,3 +15,5 @@ Keep running tests every time file changed:
 ```
 echo Kata.hs | entr doctest --verbose Kata.hs
 ```
+[entr](http://eradman.com/entrproject/) can be installed with `brew install
+entr` for you Mac kiddos.
