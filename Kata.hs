@@ -48,9 +48,7 @@ splitAndAdd l 0 = l
 splitAndAdd [i] _ = [i]
 splitAndAdd l n = splitAndAdd summed (n-1)
   where
-    (s1,s2) = splitHalf l
-    eqLen = length s1 == length s2
-    paddedS1 = if eqLen
-               then s1
-               else [0] ++ s1
-    summed = zipWith (+) paddedS1 s2
+    (s1,s2@(hs2:ts2)) = splitHalf l
+    summed = if length s1 == length s2
+             then zipWith (+) s1 s2
+             else hs2 : zipWith (+) s1 ts2
