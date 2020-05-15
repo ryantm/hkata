@@ -14,8 +14,6 @@ ghc-options:
 
 dependencies:
   - base >= 4.7 && < 5
-  - parsec
-  - foldl
 
 executables:
   hkata:

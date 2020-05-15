@@ -1,10 +1,10 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: d45cd54483be2deb40ddfdf99367d543f7a5fa05e36c66166c04610fcffc4f36
+-- hash: 4cacd679ca1dd4265a53167b3b52e3e248082e087a7b8b94d72642f872ce2252
 
 name:           kata
 version:        0.0.0.0
@@ -22,15 +22,22 @@ source-repository head
   type: git
   location: https://github.com/ryantm/hkata
 
-test-suite doctests
-  type: exitcode-stdio-1.0
+executable hkata
   main-is: Kata.hs
   other-modules:
       Paths_kata
   ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
+  default-language: Haskell2010
+
+test-suite doctests
+  type: exitcode-stdio-1.0
+  main-is: doctests.hs
+  other-modules:
+      Paths_kata
+  ghc-options: -Wall -threaded
+  build-depends:
+      base >=4.7 && <5
     , doctest
-    , foldl
-    , parsec
   default-language: Haskell2010
