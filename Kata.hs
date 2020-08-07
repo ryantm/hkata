@@ -1,54 +1,73 @@
 module Kata where
 
--- | splitHalf
---
--- >>> splitHalf [1, 2, 5, 7, 2, 3, 5, 7, 8]
--- ([1,2,5,7],[2,3,5,7,8])
-splitHalf :: [a] -> ([a],[a])
-splitHalf l = splitAt (length l `div` 2) l
+-- Two tortoises named A and B must run a race. A starts with an
+-- average speed of 720 feet per hour. Young B knows she runs faster
+-- than A, and furthermore has not finished her cabbage.
 
--- | splitAndAdd
---
--- >>> splitAndAdd [1] 0
--- [1]
---
--- >>> splitAndAdd [1] 1
--- [1]
---
--- >>> splitAndAdd [1, 2] 0
--- [1,2]
---
--- >>> splitAndAdd [1, 2] 1
--- [3]
---
--- >>> splitAndAdd [1, 2, 3] 1
--- [2,4]
---
--- >>> splitAndAdd [1, 2, 3] 2
--- [6]
---
--- >>> splitAndAdd [1,2,3,4,5] 2
--- [5,10]
--- >>> splitAndAdd [1,2,3,4,5] 3
--- [15]
--- >>> splitAndAdd [15] 3
--- [15]
--- >>> splitAndAdd [32,45,43,23,54,23,54,34] 2
--- [183,125]
--- >>> splitAndAdd [32,45,43,23,54,23,54,34] 0
--- [32,45,43,23,54,23,54,34]
--- >>> splitAndAdd [3,234,25,345,45,34,234,235,345] 3
--- [305,1195]
--- >>> splitAndAdd [3,234,25,345,45,34,234,235,345,34,534,45,645,645,645,4656,45,3] 4
--- [1040,7712]
--- >>> splitAndAdd [23,345,345,345,34536,567,568,6,34536,54,7546,456] 20
--- [79327]
-splitAndAdd :: [Int] -> Int -> [Int]
-splitAndAdd l 0 = l
-splitAndAdd [i] _ = [i]
-splitAndAdd l n = splitAndAdd summed (n-1)
-  where
-    (s1,s2@(hs2:ts2)) = splitHalf l
-    summed = if length s1 == length s2
-             then zipWith (+) s1 s2
-             else hs2 : zipWith (+) s1 ts2
+-- When she starts, at last, she can see that A has a 70 feet lead but
+-- B's speed is 850 feet per hour. How long will it take B to catch A?
+
+-- More generally: given two speeds v1 (A's speed, integer > 0) and v2
+-- (B's speed, integer > 0) and a lead g (integer > 0) how long will
+-- it take B to catch A?
+
+-- The result will be an array [hour, min, sec] which is the time
+-- needed in hours, minutes and seconds (round down to the nearest
+-- second) or a string in some languages.
+
+-- If v1 >= v2 then return nil, nothing, null, None or {-1, -1, -1}
+-- for C++, C, Go, Nim, [] for Kotlin or "-1 -1 -1".
+
+-- Examples:
+
+-- (form of the result depends on the language)
+
+-- race(720, 850, 70) => [0, 32, 18] or "0 32 18"
+-- race(80, 91, 37)   => [3, 21, 49] or "3 21 49"
+
+-- ** Note:
+
+--     See other examples in "Your test cases".
+
+--     In Fortran - as in any other language - the returned string is
+--     not permitted to contain any redundant trailing whitespace: you
+--     can use dynamically allocated character strings.
+
+-- ** Hints for people who don't know how to convert to hours,
+
+-- ** minutes, seconds:
+
+--     Tortoises don't care about fractions of seconds
+
+--     Think of calculation by hand using only integers (in your code
+--     use or simulate integer division)
+
+--     or Google: "convert decimal time to hours minutes seconds"
+
+-- race(720, 850, 70) => [0, 32, 18] or "0 32 18"
+-- race(80, 91, 37)   => [3, 21, 49] or "3 21 49"
+
+-- | race
+-- >>> race 2 1 1
+-- Nothing
+-- >>> race 1 1 1
+-- Nothing
+-- >>> race 1 1 0
+-- Nothing
+-- >>> race 1 2 1
+-- Just (1,0,0)
+-- >>> race 1 2 2
+-- Just (2,0,0)
+-- >>> race 0 60 1
+-- Just (0,1,0)
+-- >>> race 720 850 70
+-- Just (0,32,18)
+-- >>> race 80 91 37
+-- Just (3,21,49)
+race :: Int -> Int -> Int -> Maybe (Int, Int, Int)
+race a b _ | a >= b = Nothing
+race a b lead =
+  let totalSeconds = (lead * 3600) `div` (b - a)
+      (hours, remainderSeconds) = totalSeconds `divMod` 3600
+      (minutes, seconds) = remainderSeconds `divMod` 60
+   in Just (hours, minutes, seconds)
