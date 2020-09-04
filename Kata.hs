@@ -1,73 +1,21 @@
 module Kata where
 
--- Two tortoises named A and B must run a race. A starts with an
--- average speed of 720 feet per hour. Young B knows she runs faster
--- than A, and furthermore has not finished her cabbage.
+-- Your team is writing a fancy new text editor and you've been tasked
+-- with implementing the line numbering.
 
--- When she starts, at last, she can see that A has a 70 feet lead but
--- B's speed is 850 feet per hour. How long will it take B to catch A?
+-- Write a function which takes a list of strings and returns each
+-- line prepended by the correct number.
 
--- More generally: given two speeds v1 (A's speed, integer > 0) and v2
--- (B's speed, integer > 0) and a lead g (integer > 0) how long will
--- it take B to catch A?
-
--- The result will be an array [hour, min, sec] which is the time
--- needed in hours, minutes and seconds (round down to the nearest
--- second) or a string in some languages.
-
--- If v1 >= v2 then return nil, nothing, null, None or {-1, -1, -1}
--- for C++, C, Go, Nim, [] for Kotlin or "-1 -1 -1".
+-- The numbering  starts at  1. The  format is  n: string.  Notice the
+-- colon and space in between.
 
 -- Examples:
 
--- (form of the result depends on the language)
+-- number [] -- returns []
+-- number ["a", "b", "c"] -- returns ["1: a", "2: b", "3: c"]
 
--- race(720, 850, 70) => [0, 32, 18] or "0 32 18"
--- race(80, 91, 37)   => [3, 21, 49] or "3 21 49"
-
--- ** Note:
-
---     See other examples in "Your test cases".
-
---     In Fortran - as in any other language - the returned string is
---     not permitted to contain any redundant trailing whitespace: you
---     can use dynamically allocated character strings.
-
--- ** Hints for people who don't know how to convert to hours,
-
--- ** minutes, seconds:
-
---     Tortoises don't care about fractions of seconds
-
---     Think of calculation by hand using only integers (in your code
---     use or simulate integer division)
-
---     or Google: "convert decimal time to hours minutes seconds"
-
--- race(720, 850, 70) => [0, 32, 18] or "0 32 18"
--- race(80, 91, 37)   => [3, 21, 49] or "3 21 49"
-
--- | race
--- >>> race 2 1 1
--- Nothing
--- >>> race 1 1 1
--- Nothing
--- >>> race 1 1 0
--- Nothing
--- >>> race 1 2 1
--- Just (1,0,0)
--- >>> race 1 2 2
--- Just (2,0,0)
--- >>> race 0 60 1
--- Just (0,1,0)
--- >>> race 720 850 70
--- Just (0,32,18)
--- >>> race 80 91 37
--- Just (3,21,49)
-race :: Int -> Int -> Int -> Maybe (Int, Int, Int)
-race a b _ | a >= b = Nothing
-race a b lead =
-  let totalSeconds = (lead * 3600) `div` (b - a)
-      (hours, remainderSeconds) = totalSeconds `divMod` 3600
-      (minutes, seconds) = remainderSeconds `divMod` 60
-   in Just (hours, minutes, seconds)
+-- | number
+-- >>> number []
+-- []
+number :: [String] -> [String]
+number = undefined
