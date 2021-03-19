@@ -4,7 +4,7 @@ cabal-version: 2.2
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4cacd679ca1dd4265a53167b3b52e3e248082e087a7b8b94d72642f872ce2252
+-- hash: 939cda88cb097127c0655cb31bd4f1f96c32fad569883fb8e579d14072f22ce6
 
 name:           kata
 version:        0.0.0.0
@@ -29,6 +29,8 @@ executable hkata
   ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
+    , containers
+    , foldl
   default-language: Haskell2010
 
 test-suite doctests
@@ -39,5 +41,7 @@ test-suite doctests
   ghc-options: -Wall -threaded
   build-depends:
       base >=4.7 && <5
+    , containers
     , doctest
+    , foldl
   default-language: Haskell2010

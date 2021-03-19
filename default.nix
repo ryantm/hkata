@@ -22,5 +22,6 @@ in pkg.overrideAttrs (attrs: {
   propagatedBuildInputs = with pkgs; [
     cabal-install
     entr
+    ghcid
   ];
 })

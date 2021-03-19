@@ -1,21 +1,21 @@
 module Kata where
 
--- Your team is writing a fancy new text editor and you've been tasked
--- with implementing the line numbering.
-
--- Write a function which takes a list of strings and returns each
--- line prepended by the correct number.
-
--- The numbering  starts at  1. The  format is  n: string.  Notice the
--- colon and space in between.
-
--- Examples:
-
--- number [] -- returns []
--- number ["a", "b", "c"] -- returns ["1: a", "2: b", "3: c"]
-
--- | number
--- >>> number []
--- []
-number :: [String] -> [String]
-number = undefined
+-- |
+-- >>> bouncingBall 0 undefined undefined
+-- -1
+-- >>> bouncingBall 1 0 undefined
+-- -1
+-- >>> bouncingBall 1 1 undefined
+-- -1
+-- >>> bouncingBall 1 0.5 2
+-- -1
+-- >>> bouncingBall 3 0.66 1.5
+-- 3
+-- >>> bouncingBall 30.0 0.66 1.5
+-- 15
+bouncingBall :: Double -> Double -> Double -> Integer
+bouncingBall height bounce window
+  | height <= 0 = -1
+  | bounce <= 0 || bounce >= 1 = -1
+  | window >= height = -1
+  | otherwise = 2 + bouncingBall (height * bounce) bounce window
