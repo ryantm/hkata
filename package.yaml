@@ -13,17 +13,15 @@ ghc-options:
   -Wall
 
 dependencies:
-  - base >= 4.7 && < 5
+  - base >= 4.16 && < 5
   - containers
-  - foldl
-
 executables:
   hkata:
     main: Kata.hs
 
 tests:
   doctests:
-    main: doctests.hs
+    main: Test.hs
     ghc-options: -threaded
     dependencies:
       - doctest
