@@ -1,64 +1,36 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Kata where
 
--- https://www.codewars.com/kata/544675c6f971f7399a000e79
+import Control.Category
 
--- We need a function that can transform a string into a number. What
--- ways of achieving this do you know?
+-- https://www.codewars.com/kata/5264d2b162488dc400000001/train/haskell
 
--- Note: Don't worry, all inputs will be strings, and every string is
--- a perfectly valid representation of an integral number.
+-- Write a function that takes in a string of one or more words, and
+-- returns the same string, but with all five or more letter words
+-- reversed (Just like the name of this Kata). Strings passed in will
+-- consist of only letters and spaces. Spaces will be included only
+-- when more than one word is present.
 
--- Examples
+-- Examples:
 
--- "1234" --> 1234
--- "605"  --> 605
--- "1405" --> 1405
--- "-7" --> -7
-
-
-import Data.List (findIndex)
-import Data.Maybe (fromMaybe)
-
+-- spinWords( "Hey fellow warriors" ) => returns "Hey wollef sroirraw" 
+-- spinWords( "This is a test") => returns "This is a test" 
+-- spinWords( "This is another test" )=> returns "This is rehtona test"
 
 -- |
--- >>> stringToNumber "0"
--- 0
--- >>> stringToNumber "1"
--- 1
--- >>> stringToNumber "2"
--- 2
--- >>> stringToNumber "3"
--- 3
--- >>> stringToNumber "4"
--- 4
--- >>> stringToNumber "5"
--- 5
--- >>> stringToNumber "6"
--- 6
--- >>> stringToNumber "7"
--- 7
--- >>> stringToNumber "8"
--- 8
--- >>> stringToNumber "9"
--- 9
--- >>> stringToNumber "10"
--- 10
--- >>> stringToNumber "1234"
--- 1234
--- >>> stringToNumber "1405"
--- 1405
--- >>> stringToNumber "-7"
--- -7
--- >>> stringToNumber "-20"
--- -20
-stringToNumber :: String -> Integer
-stringToNumber ('-':ds) = -1 * stringToNumber ds
-stringToNumber s = go (reverse s) 1
+--
+-- >>> spinWords "Hell"
+-- "Hell"
+-- >>> spinWords "Hello"
+-- "olleH"
+-- >>> spinWords "Hello world"
+-- "olleH dlrow"
+spinWords :: String -> String
+spinWords = words >>> map maybeReverse >>> unwords
   where
-    go [] _ = 0
-    go (d:ds) multiplier =
-      multiplier * (fromDigit d) + go ds (multiplier * 10)
-    fromDigit d = fromIntegral $
-      fromMaybe (error ('\'' : d : "' is not a valid digit"))
-        (findIndex (==d) "0123456789")
+    maybeReverse = applyIf (\a -> length a >= 5) reverse
+    -- maybeReverse word | length word >= 5 = reverse word
+    --                   | otherwise = word
+
+applyIf :: (t -> Bool) -> (t -> t) -> t -> t
+applyIf p f a = if p a then f a else a
